@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://jmanstr/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://jmanstr/locale/overlay.dtd">
+<overlay id="jmanstr-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script src="overlay.js"/>
+    <keyset>
+      <key id="copy-key" modifiers="alt" key="j" oncommand="Jmanstr.jmsShortSearch();"/>
+      <key id="copy-key" modifiers="control,alt" key="j" oncommand="Jmanstr.jmsSpecialSearch();"/>
+    </keyset>
+</overlay>
