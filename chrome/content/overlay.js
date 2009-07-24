@@ -4,21 +4,17 @@ var Jmanstr = {
         this.initialized = true;
     },
 
-    jmsShortSearch: function() {
-        var selected = this.jmsGetSelection();
+    jmsShortSearch: function(format) {
+        var query = this.jmsGetSelection();
         //nothing selected == nothign to do
-        if(selected == ''){
+        if(query == ''){
             return;
         }
 
         //filter masked chars from the string
-        selected = this.jmsFormatLang(selected);
-
-       
-
-        
-        var query = selected;
-        return;
+        if(format){
+            query = this.jmsFormatLang(query);
+        }
 
         var REF_URI = Components.Constructor("@mozilla.org/network/standard-url;1", "nsIURI");
         var REF = new REF_URI;

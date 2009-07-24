@@ -4,7 +4,8 @@
 <overlay id="jmanstr-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
     <script src="overlay.js"/>
     <keyset>
-      <key id="copy-key" modifiers="alt" key="j" oncommand="Jmanstr.jmsShortSearch();"/>
-      <key id="copy-key" modifiers="control,alt" key="j" oncommand="Jmanstr.jmsSpecialSearch();"/>
+      <key id="copy-key" modifiers="alt" key="g" oncommand="Jmanstr.jmsShortSearch(false);"/>
+      <key id="copy-key" modifiers="alt" key="j" oncommand="Jmanstr.jmsShortSearch(true);"/>
+      <key id="copy-key" modifiers="alt" key="m" oncommand="Jmanstr.jmsSpecialSearch();"/>
     </keyset>
 </overlay>
