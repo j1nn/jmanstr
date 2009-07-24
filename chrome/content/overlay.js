@@ -16,14 +16,63 @@ var Jmanstr = {
             query = this.jmsFormatLang(query);
         }
 
+        this.jmsGoogle(query);
+    },
+    jmsGoogle: function(query, win){
+        if(win == undefined || win == null){
+            win = window;
+        }
+
         var REF_URI = Components.Constructor("@mozilla.org/network/standard-url;1", "nsIURI");
         var REF = new REF_URI;
-        var newTab = getBrowser().addTab("http://www.google.com/search?q=" + query, REF, null, null);
+        var newTab = win.getBrowser().addTab("http://www.google.com/search?q=" + query, REF, null, null);
         //getBrowser().selectedTab = newTab; - to get focus
     },
-  
     jmsSpecialSearch: function() {
-        window.open("chrome://jmanstr/content/jmanstr.xul", "jmAnstr enchanced search", "chrome");
+        var selected = this.jmsGetSelection();
+        window.open("chrome://jmanstr/content/jmanstr.xul", selected, "chrome");
+    },
+    jmsFill: function(){
+        var selected = window.name;
+        //fill in all fields with our string
+        var fields = document.getElementsByClassName('field');
+        for(var i in fields){
+            fields[i].value = selected;
+        }
+    },
+    jmsRunTransfers: function(){
+        var checks = document.getElementsByClassName('field-check');
+        var cur,field;
+        for(var i in checks){
+            cur = checks[i];
+            if(cur.checked){
+                field = document.getElementById(cur.id + '-string');
+                field.value = this.jsmDispatchTransfer(cur.id, field.value);
+                cur.checked = false;
+            }
+        }
+    },
+    jsmDispatchTransfer: function(what, value){
+        switch(what){
+            case 'rev':
+                return value.split('').reverse().join('');
+            case 'en':
+                return this.toEn(value);
+            case 'ru':
+                return this.toRu(value);
+        }
+        return value;
+    },
+    jmsGoogleTransfers: function(){
+        var checks = document.getElementsByClassName('field-check');
+        var cur,field;
+        for(var i in checks){
+            cur = checks[i];
+            if(cur.checked){
+                field = document.getElementById(cur.id + '-string');
+                this.jmsGoogle(field.value, window.opener);
+            }
+        }
     },
     jmsFormatLang: function(string){
          //part 1: collect ascii stats
@@ -49,7 +98,7 @@ var Jmanstr = {
             curCode = string.charCodeAt(i);
             curChar = string.charAt(i);
             if((this.isru(curCode) && transToEn) || (this.isen(curCode) && !transToEn)){
-                curChar = this.transfer(curChar, transToEn);
+                curChar = this.recode(curChar, transToEn);
             }
             formatted += curChar;
         }
@@ -57,8 +106,8 @@ var Jmanstr = {
         return formatted;
     },
     jmsGetSelection: function(){
-        var focused_window = document.commandDispatcher.focusedWindow;
-        var sel_text = focused_window.getSelection();
+        var win = document.commandDispatcher.focusedWindow;
+        var sel_text = win.getSelection();
         return sel_text.toString();
     },
     isen: function(code){
@@ -67,7 +116,7 @@ var Jmanstr = {
     isru: function(code){
         return (code >= 1040 && code <= 1103);
     },
-    transfer: function(c, toEn){
+    recode: function(c, toEn){
         //first letter - en, second one - ru
         var jmsSringFormatChars = {'e':'\u0435','t':'\u0442','y':'\u0443','u':'\u0438',
                                     'o':'\u043e','p':'\u0440','a':'\u0430','g':'\u0434',
@@ -85,8 +134,39 @@ var Jmanstr = {
             }
         }
         return c;
+    },
+    selectAll: function(){
+        var checks = document.getElementsByClassName('field-check');
+        for(var i in checks){
+            checks[i].checked = !checks[i].checked;
+        }
+    },
+    toEn: function(st){
+        var len = st.length;
+        var ret = new Array(len);
+        var cur = '';
+        for(var i = 0; i < len; ++i){
+            cur = st.charCodeAt(i);
+            if(this.isru(cur)){
+                cur -= 985;
+            }
+            ret[i] = String.fromCharCode(cur);
+        }
+        return ret.join('');
+    },
+    toRu: function(st){
+        var len = st.length;
+        var ret = new Array(len);
+        var cur = '';
+        for(var i = 0; i < len; ++i){
+            cur = st.charCodeAt(i);
+            if(this.isen(cur)){
+                cur += 985;
+            }
+            ret[i] = String.fromCharCode(cur);
+        }
+        return ret.join('');
     }
-
 };
 
 window.addEventListener("load", function(e) { 

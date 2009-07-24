@@ -1,3 +1,7 @@
-<!ENTITY title.label "Hello World">
-<!ENTITY separate.label "This is a separate window!">
-<!ENTITY close.label "Close">
+<!ENTITY title.label "jManStr enchanced strings">
+<!ENTITY all.label "revert selection">
+<!ENTITY run.label "run">
+<!ENTITY google.label "google">
+<!ENTITY reverse.label "reverse string">
+<!ENTITY en.label "all to en by ascii">
+<!ENTITY ru.label "all to ru by ascii">
