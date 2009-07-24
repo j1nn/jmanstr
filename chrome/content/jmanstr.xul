@@ -3,7 +3,7 @@
 <?xml-stylesheet href="chrome://jmanstr/skin/jmanstr.css" type="text/css"?>
 <!DOCTYPE window SYSTEM "chrome://jmanstr/locale/jmanstr.dtd">
 
-<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" height="500" width="500"
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" height="600" width="500"
         title="&title.label;" orient="vertical" onload="Jmanstr.jmsFill();" id="jmanstWin">
 <script src="overlay.js"/>
 
@@ -44,6 +44,18 @@
     </hbox>
     <hbox align="center">
         <checkbox id="mvr" label="&mvr.label;" class="field-check"/><textbox id="mvr-string" class="field"/>
+    </hbox>
+    <hbox align="center">
+        <checkbox id="enkrl" label="&enkrl.label;" class="field-check"/><textbox id="enkrl-string" class="field"/>
+    </hbox>
+    <hbox align="center">
+        <checkbox id="enklr" label="&enklr.label;" class="field-check"/><textbox id="enklr-string" class="field"/>
+    </hbox>
+    <hbox align="center">
+        <checkbox id="rukrl" label="&rukrl.label;" class="field-check"/><textbox id="rukrl-string" class="field"/>
+    </hbox>
+    <hbox align="center">
+        <checkbox id="ruklr" label="&ruklr.label;" class="field-check"/><textbox id="ruklr-string" class="field"/>
     </hbox>
 </groupbox>
 <hbox align="center" flex="1" pack="center" id="buttons">

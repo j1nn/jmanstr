@@ -16,4 +16,8 @@
 <!ENTITY rabcru.label "reversed alphabet order, rus">
 <!ENTITY mvl.label "move left in abc (abc,2)">
 <!ENTITY mvr.label "move right in abc (xyz,2)">
+<!ENTITY enkrl.label "keyboard order, row-letter, eng">
+<!ENTITY enklr.label "keyboard order, letters only, eng">
+<!ENTITY rukrl.label "keyboard order, row-letter, rus">
+<!ENTITY ruklr.label "keyboard order, letters only, rus">
 

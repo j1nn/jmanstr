@@ -74,6 +74,14 @@ var Jmanstr = {
                 return this.jmsMoveAbc(value, true);
             case 'mvr':
                 return this.jmsMoveAbc(value, false);
+            case 'enkrl':
+                return this.jmsKeyboard(value, false, true);
+            case 'enklr':
+                return this.jmsKeyboard(value, true, true);
+            case 'rukrl':
+                return this.jmsKeyboard(value, false, false);
+            case 'ruklr':
+                return this.jmsKeyboard(value, true, false);
         }
         return value;
     },
@@ -281,6 +289,41 @@ var Jmanstr = {
         }
 
         return this.jmsAbc(res.join('-'), en, true, true);
+    },
+    calcKeyboardRows: function(nums){
+        var res = new Array();
+        var len = nums.length;
+        for(var i = 0; i < (len - 1); ++i){
+            res[i / 2] = parseInt(nums[i]) * parseInt(nums[i + 1]);
+        }
+        return res;
+    },
+    jmsKeyboard: function(st, simpleCount, en){
+        var delim = this.findDelimiter(st);
+        var nums = st.split(delim);
+        if(!simpleCount){
+            if(nums.length % 2 != 0){
+                return 'error: odd number of the numbers';
+            }
+            nums = this.calcKeyboardRows(nums);
+        }
+        if(en){
+            var kmap = new Array('q','w','e','r','t','y','u','i','o','p','a','s','d',
+                                'f','g','h','j','k','l','z','x','c','v','b','n','m');
+        }
+        else{
+            kmap = new Array('\u0439','\u0446','\u0443','\u043a','\u0435','\u043d','\u0433',
+                            '\u0448','\u0449','\u0437','\u0445','\u044a','\u0444','\u044b',
+                            '\u0432','\u0430','\u0440f','\u043e0','\u043e','\u043b','\u0434',
+                            '\u0436','\u044d','\u044f','\u0447','\u0441','\u043c','\u0438',
+                            '\u0442','\u044c','\u0431','\u044e');
+        }
+        var res = new Array();
+        var len = nums.length;
+        for(var i = 0; i < len; ++i){
+           res[i] = kmap[nums[i]];
+        }
+        return res.join('');
     }
 };
 
