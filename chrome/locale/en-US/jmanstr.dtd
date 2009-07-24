@@ -2,6 +2,18 @@
 <!ENTITY all.label "revert selection">
 <!ENTITY run.label "run">
 <!ENTITY google.label "google">
+
+<!ENTITY simpleManip "simple manipulation">
+<!ENTITY numManip "numeric manipulation">
+
 <!ENTITY reverse.label "reverse string">
 <!ENTITY en.label "all to en by ascii">
 <!ENTITY ru.label "all to ru by ascii">
+<!ENTITY nc.label "clean similar letters">
+<!ENTITY abcen.label "alphabet order, eng">
+<!ENTITY abcru.label "alphabet order, rus">
+<!ENTITY rabcen.label "reversed alphabet order, eng">
+<!ENTITY rabcru.label "reversed alphabet order, rus">
+<!ENTITY mvl.label "move left in abc (abc,2)">
+<!ENTITY mvr.label "move right in abc (xyz,2)">
+

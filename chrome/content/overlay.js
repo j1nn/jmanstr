@@ -60,6 +60,20 @@ var Jmanstr = {
                 return this.toEn(value);
             case 'ru':
                 return this.toRu(value);
+            case 'nc':
+                return this.jmsFormatLang(value);
+            case 'abcen':
+                return this.jmsAbc(value, true, true, true);
+            case 'abcru':
+                return this.jmsAbc(value, false, true, true);
+            case 'rabcen':
+                return this.jmsAbc(value, true, false, true);
+            case 'rabcru':
+                return this.jmsAbc(value, false, false, true);
+            case 'mvl':
+                return this.jmsMoveAbc(value, true);
+            case 'mvr':
+                return this.jmsMoveAbc(value, false);
         }
         return value;
     },
@@ -166,6 +180,107 @@ var Jmanstr = {
             ret[i] = String.fromCharCode(cur);
         }
         return ret.join('');
+    },
+    findDelimiter: function(st){
+        var len = st.length;
+        var letters = st.split('');
+        var stats = new Array();
+        var cur;
+        var regex = /^([a-z]|[0-9])$/i;
+        //collect info
+        for(var i = 0; i < len; ++i){
+            cur = letters[i];
+            //interested in non-AB and non-numeric chars only
+            if(!regex.test(cur)){
+                if(stats[cur] == undefined || stats[cur] == null){
+                    stats[cur] = 0;
+                }
+                ++stats[cur];
+            }
+        }
+        //choose delimiter
+        var max = 0;
+        var delim = '';
+        for(var x in stats){
+            if(stats[x] > max){
+                max = stats[x];
+                delim = x;
+            }
+        }
+
+        return delim;
+    },
+    numToChar: function(num, diff, asc, total){
+        if(isNaN(num)){
+            return num;
+        }
+        if(asc){
+            return String.fromCharCode(parseInt(num) + diff);
+        }
+        else{
+            return String.fromCharCode(total - parseInt(num) + diff);
+        }
+    },
+    charToNum: function(c, diff, asc, total){
+        if(!isNaN(c)){
+            return c;
+        }
+        if(asc){
+            return c.charCodeAt(0) - diff;
+        }
+        else{
+            return total - (c.charCodeAt(0) - diff);
+        }
+    },
+    jmsAbc: function(st, en, asc, numToLet){
+        var delim = this.findDelimiter(st);
+        var nums = st.split(delim);
+        var diff = 96;//en
+        var total = 27;
+        //get lang from first char
+        if(!en){
+            diff = 1071;//ru
+            total = 33;
+        }
+        var cur;
+        var res = new Array();
+        for(var i in nums){
+            cur = nums[i];
+            if(numToLet){
+                res[i] = this.numToChar(cur, diff, asc, total);
+            }
+            else{
+                res[i] = this.charToNum(cur, diff, asc, total);
+            }
+        }
+
+        return res.join('');
+    },
+    jmsMoveAbc: function(st, left){
+        var params = st.split(',');
+        st = params[0].toLowerCase();
+        var move = parseInt(params[1]);
+        if(move == undefined || isNaN(move)){
+            move = 1;
+        }
+        if(left){
+            move *= -1;
+        }
+
+
+        var en = true;
+        if(this.isru(st.charCodeAt(0))){
+            en = false;
+        }
+        var nums = this.jmsAbc(st, en, true, false);
+        
+        var len = nums.length;
+        var res = new Array(len);
+        for(var i = 0; i < len; ++i){
+            res[i] = parseInt(nums[i]) + move;
+        }
+
+        return this.jmsAbc(res.join('-'), en, true, true);
     }
 };
 

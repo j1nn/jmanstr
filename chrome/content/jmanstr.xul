@@ -3,19 +3,49 @@
 <?xml-stylesheet href="chrome://jmanstr/skin/jmanstr.css" type="text/css"?>
 <!DOCTYPE window SYSTEM "chrome://jmanstr/locale/jmanstr.dtd">
 
-<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" height="500" width="500"
         title="&title.label;" orient="vertical" onload="Jmanstr.jmsFill();" id="jmanstWin">
 <script src="overlay.js"/>
 
-<hbox align="center">
-    <checkbox id="rev" label="&reverse.label;" class="field-check"/><textbox id="rev-string" class="field"/>
-</hbox>
-<hbox align="center">
-    <checkbox id="en" label="&en.label;" class="field-check"/><textbox id="en-string" class="field"/>
-</hbox>
-<hbox align="center">
-    <checkbox id="ru" label="&ru.label;" class="field-check"/><textbox id="ru-string" class="field"/>
-</hbox>
+<!-- EXAMPLE hbox align="center">
+    <checkbox id="XX" label="&XX.label;" class="field-check"/><textbox id="XX-string" class="field"/>
+</hbox-->
+<groupbox>
+    <caption label="&simpleManip;"/>
+    <hbox align="center">
+        <checkbox id="rev" label="&reverse.label;" class="field-check"/><textbox id="rev-string" class="field"/>
+    </hbox>
+    <hbox align="center">
+        <checkbox id="en" label="&en.label;" class="field-check"/><textbox id="en-string" class="field"/>
+    </hbox>
+    <hbox align="center">
+        <checkbox id="ru" label="&ru.label;" class="field-check"/><textbox id="ru-string" class="field"/>
+    </hbox>
+    <hbox align="center">
+        <checkbox id="nc" label="&nc.label;" class="field-check"/><textbox id="nc-string" class="field"/>
+    </hbox>
+</groupbox>
+<groupbox>
+    <caption label="&numManip;"/>
+    <hbox align="center">
+        <checkbox id="abcen" label="&abcen.label;" class="field-check"/><textbox id="abcen-string" class="field"/>
+    </hbox>
+    <hbox align="center">
+        <checkbox id="rabcen" label="&rabcen.label;" class="field-check"/><textbox id="rabcen-string" class="field"/>
+    </hbox>
+    <hbox align="center">
+        <checkbox id="abcru" label="&abcru.label;" class="field-check"/><textbox id="abcru-string" class="field"/>
+    </hbox>    
+    <hbox align="center">
+        <checkbox id="rabcru" label="&rabcru.label;" class="field-check"/><textbox id="rabcru-string" class="field"/>
+    </hbox>
+    <hbox align="center">
+        <checkbox id="mvl" label="&mvl.label;" class="field-check"/><textbox id="mvl-string" class="field"/>
+    </hbox>
+    <hbox align="center">
+        <checkbox id="mvr" label="&mvr.label;" class="field-check"/><textbox id="mvr-string" class="field"/>
+    </hbox>
+</groupbox>
 <hbox align="center" flex="1" pack="center" id="buttons">
     <button label="&all.label;" oncommand="Jmanstr.selectAll();"/>
     <button label="&run.label;" oncommand="Jmanstr.jmsRunTransfers();"/>
