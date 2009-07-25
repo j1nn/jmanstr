@@ -3,8 +3,8 @@
 <?xml-stylesheet href="chrome://jmanstr/skin/jmanstr.css" type="text/css"?>
 <!DOCTYPE window SYSTEM "chrome://jmanstr/locale/jmanstr.dtd">
 
-<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" height="600" width="500"
-        title="&title.label;" orient="vertical" onload="Jmanstr.jmsFill();" id="jmanstWin">
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+        title="&title.label;" orient="horizontal" onload="Jmanstr.jmsFill();" id="jmanstWin">
 <script src="overlay.js"/>
 
 <!-- EXAMPLE hbox align="center">
@@ -58,10 +58,11 @@
         <checkbox id="ruklr" label="&ruklr.label;" class="field-check"/><textbox id="ruklr-string" class="field"/>
     </hbox>
 </groupbox>
-<hbox align="center" flex="1" pack="center" id="buttons">
-    <button label="&all.label;" oncommand="Jmanstr.selectAll();"/>
+<groupbox orient="vertical">
+<vbox align="center" flex="1" pack="center" id="buttons">    
     <button label="&run.label;" oncommand="Jmanstr.jmsRunTransfers();"/>
     <button label="&google.label;" oncommand="Jmanstr.jmsGoogleTransfers();close();"/>
-</hbox>
-
+    <button label="&all.label;" oncommand="Jmanstr.selectAll();"/>
+</vbox>
+</groupbox>
 </window>
